@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .login-container {
+            width: 300px;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .logo img {
+            width: 180px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+        }
+
+        .login-form label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .login-form select,
+        .login-form input {
+            width: 100%;
+            padding: 7px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 10px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-form button:hover {
+            background: #45a049;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .dashboard-container h2 {
+            flex-basis: 100%;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-container .option {
+            width: 120px;
+            height: 150px;
+            margin: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .dashboard-container .option:hover {
+            background: #e8f5e9;
+            transform: scale(1.05);
+        }
+
+        .dashboard-container .option img {
+            width: 70px;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-container .option span {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .exam-links-page {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .exam-links-page a {
+            margin: 10px;
+            padding: 10px 20px;
+            background: #4caf50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .exam-links-page a:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="login-container">
+        <div class="logo">
+            <img src="https://i.postimg.cc/m28bJZk9/img-avatar2.png" alt="Logo">
+        </div>
+        <form class="login-form" onsubmit="handleLogin(event)">
+            <label for="username">Username</label>
+            <select id="username" name="username" required>
+                <option value="">Select USER ID</option>
+                <option>ABHISHEK KUMAR</option>
+                <option>AMIT KUMAR</option>
+                <option>ANNU</option>
+                <option>ANKUR KUMAR</option>
+                <option>ANJUL PATEL</option>
+                <option>DEEPENDRA SINGH</option>
+                <option>SHIVA KUMAR</option>
+                <option>SUMIT SHRIVASHTV</option>
+                <option>PRIYANSHU</option>
+                <option>ADMIN</option>
+            </select>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <div class="dashboard-container" id="dashboard-container" style="display: none;">
+        <h2>Welcome to Artheshy's Website</h2>
+        <div class="option" onclick="startExam()">
+            <img src="https://i.postimg.cc/T3ZWfLBF/242-2423250-exam-png-transparent-image-exam-png-png-download.png" alt="Start Exam">
+            <span>Start Exam</span>
+        </div>
+        <div class="option" onclick="showResult()">
+            <img src="https://i.postimg.cc/FH6Qw9tP/9913579.png" alt="Show Result">
+            <span>Show Result</span>
+        </div>
+        <div class="option" onclick="callAdmin()">
+            <img src="https://i.postimg.cc/hPVGTyYy/admin-icon-trendy-design-style-isolated-white-background-vector-simple-modern-flat-symbol-web-site-m.jpg" alt="Call Admin">
+            <span>Call Admin</span>
+        </div>
+        <div class="option" onclick="viewAttendance()">
+            <img src="https://i.postimg.cc/XJXJ5VMd/student-attendance-icon-4.png" alt="Attendance">
+            <span>Attendance</span>
+        </div>
+        <div class="option" onclick="openTelegram()">
+            <img src="https://i.postimg.cc/qqQxLPp8/Telegram-software-Logo-wine.png" alt="Telegram">
+            <span>Telegram</span>
+        </div>
+    </div>
+
+    <div id="exam-links-page" class="exam-links-page" style="display: none;">
+        <!-- Exam links will be dynamically generated here -->
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const credentials = {
+                "ABHISHEK KUMAR": "4021",
+                "AMIT KUMAR": "401",
+                "ANNU": "402",
+                "ANKUR KUMAR": "1234",
+                "ANJUL PATEL": "403",
+                "DEEPENDRA SINGH": "404",
+                "SHIVA KUMAR": "2580",
+                "SUMIT SHRIVASHTV": "406",
+                "PRIYANSHU": "408",
+                "ADMIN": "@artheshy"
+            };
+
+            if (credentials[username] === password) {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('dashboard-container').style.display = 'flex';
+            } else {
+                alert('Invalid username or password. Please try again.');
+            }
+        }
+
+        function startExam() {
+            const examLinks = [
+                { name: "Exam 1", url: "http://testmoz.com/13694434" },
+                { name: "Exam 2", url: "http://testmoz.com/13695658" },
+                { name: "Exam 3", url: "https://testmoz.com/q/13707444" },
+                { name: "Google Search", url: "https://www.google.com" }
+            ];
+
+            const linksPage = document.getElementById('exam-links-page');
+            linksPage.innerHTML = ""; // Clear existing links
+
+            examLinks.forEach(link => {
+                const anchor = document.createElement('a');
+                anchor.href = link.url;
+                anchor.target = '_blank';
+                anchor.textContent = link.name;
+                linksPage.appendChild(anchor);
+            });
+
+            document.getElementById('dashboard-container').style.display = 'none';
+            linksPage.style.display = 'flex';
+        }
+
+        function callAdmin() {
+            window.location.href = "tel:7991733920";
+        }
+
+        function openTelegram() {
+            window.open("https://t.me/+tq2DR6AIgVEwYmU9", "_blank");
+        }
+
+        function viewAttendance() {
+            alert("Displaying Attendance...");
+            const img = new Image();
+            img.src = "https://i.postimg.cc/Y9Ws8tQ9/attendance.png"; // Replace with your actual PNG URL
+            img.style.width = "100%";
+            img
+             
+            // Get the container and clear any existing links
+            const linksContainer = document.getElementById('exam-links');
+            linksContainer.innerHTML = "";
+
+            // Add links dynamically
+            links.forEach(link => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<a href="${link.url}" target="_self">${link.name}</a>`;
+                linksContainer.appendChild(listItem);
+            });
+
+            // Show the links container
+            document.getElementById('exam-links-container').style.display = 'block';
+        }
+
+        function showResult() {
+            alert("Showing result...");
+        }
+
+        function callAdmin() {
+            alert("Calling admin...");
+        }
+
+        function viewAttendance() {
+            alert("Viewing attendance...");
+        }
+    </script>
+</body>
+</html>
+              
+            
